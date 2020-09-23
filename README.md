@@ -1,6 +1,7 @@
-## Cook.me
 
-<img src="https://github.com/nbentoneves/cook.me/blob/master/src/images/chef.png" width="100" alt="logo">
+<img src="https://github.com/nbentoneves/cook.me/blob/master/src/images/chef.png" width="150" alt="logo">
+
+## Cook.me
 
 #### Goal
 
