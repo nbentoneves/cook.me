@@ -9,6 +9,7 @@ import Chip from "@material-ui/core/Chip";
 import Recipe from "../recipe/Recipe";
 import Button from "@material-ui/core/Button";
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {Redirect} from "react-router";
 
 const topFoodUsed = [
     {name: 'Apple', year: 1994}
@@ -87,7 +88,7 @@ export default function App() {
                                         </Link>
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Link to="/" onClick={() => {
+                                        <Link to="/cook.me" onClick={() => {
                                             setIsEnableAutocomplete(true)
                                         }}>
                                             <Button className="App-button" variant="contained"
@@ -101,7 +102,10 @@ export default function App() {
                 </div>
 
                 <Switch>
-                    <Route path="/recipe">
+                    <Route exact path="/">
+                        <Redirect to="/cook.me"/>
+                    </Route>
+                    <Route exact path="/recipe">
                         {/* https://learnwithparam.com/blog/how-to-pass-props-to-state-properly-in-react-hooks/ */}
                         <Recipe ingredients={foodSelected}/>
                     </Route>

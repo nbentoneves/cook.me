@@ -31,7 +31,7 @@ export default function Recipe(props) {
     return (
 
         <>
-            {ingredients.length === 0 ? <Redirect to="/"/> : null}
+            {ingredients.length === 0 ? <Redirect to="/cook.me"/> : null}
             <Container maxWidth="md">
                 <div className="App-Recipe">
                     <Card>
