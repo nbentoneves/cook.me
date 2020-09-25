@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import logo from '../../images/chef.svg';
-import './App.scss';
+import styles from './App.module.scss';
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -15,7 +15,7 @@ const topFoodUsed = [
     {name: 'Apple', year: 1994}
 ];
 
-export default function App() {
+const App = () => {
 
     const [food, setFood] = useState(topFoodUsed);
     const [foodSelected, setFoodSelected] = useState([]);
@@ -30,20 +30,23 @@ export default function App() {
 
     });
 
+    const ingredientsChangeHandler = (event, value) => {
+        setFoodSelected([...value]);
+    }
+
     return (
         <div>
             <Router>
-                <div className="App">
-                    <header className="App-header">
+                <div className={styles.app}>
+                    <header className={styles.appHeader}>
                     </header>
-
                     <Container maxWidth="md">
                         <Grid container
                               justify="center"
                               alignItems="center"
                               spacing={4}>
                             <Grid item xs={12}>
-                                <img src={logo} className="App-logo" alt="logo"/>
+                                <img src={logo} className={styles.appLogo} alt="logo"/>
                             </Grid>
                             <Grid item xs={12}>
                                 <Autocomplete
@@ -53,7 +56,7 @@ export default function App() {
                                     options={food.map((option) => option.name)}
                                     freeSolo
                                     onChange={(event, value) => {
-                                        setFoodSelected(value);
+                                        ingredientsChangeHandler(event, value)
                                     }}
                                     renderTags={(value, getTagProps) =>
                                         value.map((option, index) => (
@@ -83,7 +86,7 @@ export default function App() {
                                         <Link to="/recipe" onClick={() => {
                                             setIsEnableAutocomplete(false)
                                         }}>
-                                            <Button className="App-button" variant="contained"
+                                            <Button className={styles.appButton} variant="contained"
                                                     color="primary">Recipe</Button>
                                         </Link>
                                     </Grid>
@@ -91,7 +94,7 @@ export default function App() {
                                         <Link to="/cook.me" onClick={() => {
                                             setIsEnableAutocomplete(true)
                                         }}>
-                                            <Button className="App-button" variant="contained"
+                                            <Button className={styles.appButton} variant="contained"
                                                     color="primary">Reset</Button>
                                         </Link>
                                     </Grid>
@@ -114,3 +117,5 @@ export default function App() {
         </div>
     );
 }
+
+export default App;
