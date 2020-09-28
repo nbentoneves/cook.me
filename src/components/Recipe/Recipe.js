@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Recipe.module.scss';
-import recipe from '../../images/cake.jpg';
+import recipe from '../../container/images/cake.jpg';
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -13,23 +13,21 @@ import {Redirect} from "react-router";
 
 const Recipe = (props) => {
 
-    const [ingredients, setIngredients] = useState(props.ingredients);
-
     const ingredientsTags = [];
-    for (let index = 0; index < ingredients.length; index++) {
-        if (index === ingredients.length - 1) {
+    for (let index = 0; index < props.ingredients.length; index++) {
+        if (index === props.ingredients.length - 1) {
             /**
              * FIXME: The {index} should be change for other key. This isn't performance
              */
-            ingredientsTags.push(<i key={index}>{ingredients[index]}</i>)
+            ingredientsTags.push(<i key={index}>{props.ingredients[index]}</i>)
         } else {
-            ingredientsTags.push(<i key={index}>{ingredients[index]}, </i>)
+            ingredientsTags.push(<i key={index}>{props.ingredients[index]}, </i>)
         }
     }
 
     return (
         <div className={styles.recipe}>
-            {ingredients.length === 0 ? <Redirect to="/cook.me"/> : null}
+            {props.ingredients.length === 0 ? <Redirect to="/cook.me"/> : null}
             <Container maxWidth="md">
                 <Card>
                     <CardActionArea>

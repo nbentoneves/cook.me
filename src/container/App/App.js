@@ -1,34 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import logo from '../../images/chef.svg';
+import logo from '../images/chef.svg';
 import styles from './App.module.scss';
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Chip from "@material-ui/core/Chip";
-import Recipe from "../recipe/Recipe";
+import Recipe from "../../components/Recipe/Recipe";
 import Button from "@material-ui/core/Button";
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import {Redirect} from "react-router";
-
-const topFoodUsed = [
-    {name: 'Apple', year: 1994}
-];
+import IngredientsTagger from "../../components/IngredientsTagger/IngredientsTagger";
 
 const App = () => {
 
-    const [food, setFood] = useState(topFoodUsed);
     const [foodSelected, setFoodSelected] = useState([]);
     const [isEnabledAutocomplete, setIsEnableAutocomplete] = useState(true);
-
-    async function fetchData() {
-        const list = await topFoodUsed;
-        setFood(list)
-    }
-
-    useEffect(() => {
-
-    });
 
     const ingredientsChangeHandler = (event, value) => {
         setFoodSelected([...value]);
@@ -49,35 +33,10 @@ const App = () => {
                                 <img src={logo} className={styles.appLogo} alt="logo"/>
                             </Grid>
                             <Grid item xs={12}>
-                                <Autocomplete
-                                    id="ingredients"
-                                    multiple
+                                <IngredientsTagger
                                     disabled={!isEnabledAutocomplete}
-                                    options={food.map((option) => option.name)}
-                                    freeSolo
-                                    onChange={(event, value) => {
-                                        ingredientsChangeHandler(event, value)
-                                    }}
-                                    renderTags={(value, getTagProps) =>
-                                        value.map((option, index) => (
-                                            <Chip
-                                                variant="outlined"
-                                                label={option}
-                                                {...getTagProps({index})}
-                                            />
-                                        ))
-                                    }
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            variant="outlined"
-                                            label="Products"
-                                            placeholder="Apple"
-                                        />
-                                    )}
-                                />
+                                    changed={ingredientsChangeHandler}/>
                             </Grid>
-
                             <Grid item xs={12}>
                                 <Grid
                                     container
@@ -109,8 +68,7 @@ const App = () => {
                         <Redirect to="/cook.me"/>
                     </Route>
                     <Route exact path="/recipe">
-                        {/* https://learnwithparam.com/blog/how-to-pass-props-to-state-properly-in-react-hooks/ */}
-                        <Recipe ingredients={foodSelected}/>
+                        <Recipe ingredients={foodSelected} />
                     </Route>
                 </Switch>
             </Router>
