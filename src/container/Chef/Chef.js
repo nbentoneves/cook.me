@@ -46,7 +46,7 @@ const Chef = (props) => {
                             </Link>
                         </Grid>
                         <Grid item xs={3}>
-                            <Link to="/cook.me" onClick={() => {
+                            <Link to="/" onClick={() => {
                                 setIsEnableAutocomplete(true)
                             }}>
                                 <Button className={styles.ChefButton} variant="contained"

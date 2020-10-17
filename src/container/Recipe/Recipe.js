@@ -101,7 +101,7 @@ const Recipe = (props) => {
 
     return (
         <div className={styles.recipe}>
-            {props.location.search === '' ? <Redirect to="/cook.me"/> : null}
+            {props.location.search === '' ? <Redirect to="/"/> : null}
 
             <Container maxWidth="md">
                 {recipePaper}
