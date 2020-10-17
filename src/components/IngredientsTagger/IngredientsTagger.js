@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Chip from "@material-ui/core/Chip";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
-const IngredientsTagger = (props) => {
+const ingredientsTagger = (props) => {
 
     const topFoodUsed = [
         {name: 'Apple', year: 1994}
@@ -41,4 +41,4 @@ const IngredientsTagger = (props) => {
 
 }
 
-export default IngredientsTagger;
+export default ingredientsTagger;
