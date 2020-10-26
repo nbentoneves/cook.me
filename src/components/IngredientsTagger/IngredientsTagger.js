@@ -32,8 +32,7 @@ const ingredientsTagger = (props) => {
                 <TextField
                     {...params}
                     variant="outlined"
-                    label="Products"
-                    placeholder="Apple"
+                    label="Ingredients"
                 />
             )}
         />

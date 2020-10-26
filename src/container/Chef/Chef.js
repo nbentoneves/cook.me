@@ -6,6 +6,8 @@ import styles from "./Chef.module.scss";
 import IngredientsTagger from "../../components/IngredientsTagger/IngredientsTagger";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import SearchIcon from '@material-ui/icons/Search';
+import ResetIcon from '@material-ui/icons/RotateLeft';
 
 const Chef = (props) => {
 
@@ -39,26 +41,28 @@ const Chef = (props) => {
                         changed={ingredientsChangeHandler}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid
-                        container
-                        justify="center">
-                        <Grid item xs={3}>
+                    <Grid container
+                          justify="center">
+                        <Grid item xs={6} md={3} className={styles.ChefGridButtonLeft}>
                             <Link to={{
                                 pathname: '/recipe',
                                 search: '?ingredients=' + capitalizeFood(foodSelected).join(',')
                             }} onClick={() => {
                                 setIsEnableAutocomplete(false)
                             }}>
-                                <Button className={styles.ChefButton} variant="contained"
-                                        color="primary">Recipe</Button>
+                                <Button variant="contained"
+                                        color="primary"
+                                        startIcon={<SearchIcon/>}>Recipe</Button>
                             </Link>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={6} md={3} className={styles.ChefGridButtonRight}>
                             <Link to="/" onClick={() => {
                                 setIsEnableAutocomplete(true)
                             }}>
-                                <Button className={styles.ChefButton} variant="contained"
-                                        color="primary">Reset</Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={<ResetIcon/>}>Reset</Button>
                             </Link>
                         </Grid>
                     </Grid>

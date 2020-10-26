@@ -7,6 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import {Redirect, withRouter} from "react-router";
+import ImageError from "../../assets/images/404.png";
+import ImageTryAgain from "../../assets/images/close.png";
 
 import {
     FacebookIcon,
@@ -24,7 +26,8 @@ const Recipe = (props) => {
     const [recipeResult, setRecipeResult] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
-    const [payloadError, setPayloadError] = useState({})
+    const [messageError, setMessageError] = useState({})
+    const [imageError, setImageError] = useState()
 
     useEffect(() => {
 
@@ -37,7 +40,13 @@ const Recipe = (props) => {
                     setIsLoading(false)
                 })
                 .catch(error => {
-                    setPayloadError(error.response.data)
+                    if (error.response.status === 404) {
+                        setImageError(ImageTryAgain)
+                        setMessageError("Did not found any recipe! Try with other ingredients.")
+                    } else {
+                        setImageError(ImageError)
+                        setMessageError("Something is not working well! Please try later...")
+                    }
                     setIsLoading(false)
                 })
         }
@@ -103,7 +112,11 @@ const Recipe = (props) => {
                 </CardActions>
             </Card>
         } else {
-            recipePaper = <div><strong>{payloadError.error}</strong></div>
+            recipePaper =
+                <div className={styles.RecipeError}>
+                    <img className={styles.RecipeErrorImage} src={imageError} alt="Bad request"/>
+                    <p><strong>{messageError}</strong></p>
+                </div>
         }
     }
 

@@ -7,6 +7,23 @@
   white-space: pre-line;
 }
 
+.RecipeError {
+  text-align: center;
+  padding: 30px;
+}
+
+.RecipeErrorImage {
+  width: 200px;
+  height: 200px;
+}
+
+@media (max-width: 500px) {
+  .RecipeErrorImage {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 .Spinner {
   font-size: 10px;
   margin: 50px auto;
@@ -15,11 +32,11 @@
   height: 11em;
   border-radius: 50%;
   background: #282c34;
-  background: -moz-linear-gradient(left, #282c34 10%, rgba(0,0,0, 0) 42%);
-  background: -webkit-linear-gradient(left, #282c34 10%, rgba(0,0,0, 0) 42%);
-  background: -o-linear-gradient(left, #282c34 10%, rgba(0,0,0, 0) 42%);
-  background: -ms-linear-gradient(left, #282c34 10%, rgba(0,0,0, 0) 42%);
-  background: linear-gradient(to right, #282c34 10%, rgba(0,0,0, 0) 42%);
+  background: -moz-linear-gradient(left, #282c34 10%, rgba(0, 0, 0, 0) 42%);
+  background: -webkit-linear-gradient(left, #282c34 10%, rgba(0, 0, 0, 0) 42%);
+  background: -o-linear-gradient(left, #282c34 10%, rgba(0, 0, 0, 0) 42%);
+  background: -ms-linear-gradient(left, #282c34 10%, rgba(0, 0, 0, 0) 42%);
+  background: linear-gradient(to right, #282c34 10%, rgba(0, 0, 0, 0) 42%);
   position: relative;
   -webkit-animation: load3 1.4s infinite linear;
   animation: load3 1.4s infinite linear;
@@ -27,6 +44,7 @@
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
 .Spinner:before {
   width: 50%;
   height: 50%;
@@ -37,6 +55,7 @@
   left: 0;
   content: '';
 }
+
 .Spinner:after {
   background: #ffffff;
   width: 75%;
@@ -50,6 +69,7 @@
   bottom: 0;
   right: 0;
 }
+
 @-webkit-keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -60,6 +80,7 @@
     transform: rotate(360deg);
   }
 }
+
 @keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);

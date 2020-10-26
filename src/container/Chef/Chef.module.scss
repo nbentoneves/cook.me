@@ -4,8 +4,18 @@
   padding-top: 5vh;
 }
 
-.ChefButton {
-  text {
-    text-decoration: none;
+.ChefGridButtonLeft {
+  text-align: right;
+  padding: 0 20px;
+}
+
+.ChefGridButtonRight {
+  text-align: left;
+  padding: 0 20px;
+}
+
+@media (max-width: 500px) {
+  .ChefButton {
+    padding: 0 100px;
   }
 }
