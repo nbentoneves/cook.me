@@ -6,7 +6,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 const ingredientsTagger = (props) => {
 
     const topFoodUsed = [
-        {name: 'Apple', year: 1994}
+        //{name: 'Apple', year: 1994}
     ];
 
     return (

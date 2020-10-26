@@ -16,6 +16,14 @@ const Chef = (props) => {
         setFoodSelected([...value]);
     }
 
+    const capitalize = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1)
+    }
+
+    const capitalizeFood = (listOfFood) => {
+        return listOfFood.map(food => capitalize(food))
+    }
+
     return (
         <Container maxWidth="md">
             <Grid container
@@ -37,7 +45,7 @@ const Chef = (props) => {
                         <Grid item xs={3}>
                             <Link to={{
                                 pathname: '/recipe',
-                                search: '?tags=' + foodSelected.join(',')
+                                search: '?ingredients=' + capitalizeFood(foodSelected).join(',')
                             }} onClick={() => {
                                 setIsEnableAutocomplete(false)
                             }}>

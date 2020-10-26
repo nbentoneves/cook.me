@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styles from './Recipe.module.scss';
-import recipeImg from '../../assets/images/cake.jpg';
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
@@ -33,7 +31,7 @@ const Recipe = (props) => {
         if (props.location.search !== '') {
             const joinTags = props.location.search.split('=')[1]
 
-            axios.get("/recipes/get?tags=" + joinTags)
+            axios.get("/recipes/get?ingredients=" + joinTags)
                 .then(response => {
                     setRecipeResult(response.data);
                     setIsLoading(false)
@@ -45,7 +43,7 @@ const Recipe = (props) => {
         }
     }, [props.location.search]);
 
-    let recipePaper = <div>Loading...</div>
+    let recipePaper = <div className={styles.Spinner}>Loading...</div>
 
     if (!isLoading) {
         if (recipeResult) {
@@ -63,34 +61,44 @@ const Recipe = (props) => {
 
             recipePaper = <Card>
                 <CardActionArea>
+                    {/*
+                    FIXME: #5 - Add a image for recipe
                     <CardMedia
                         component="img"
                         alt="Contemplative Reptile"
                         height="140"
                         image={recipeImg}
                         title="Contemplative Reptile"
-                    />
+                    />*/}
                     <CardContent>
                         <Typography variant="body1" component="div">
                             <span>Tags:</span> {ingredientsTags}
                         </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography variant="h5" component="h2">
                             {recipeResult.title}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="div">
-                            <div dangerouslySetInnerHTML={{__html: recipeResult.recipe}}/>
+                        <Typography variant="body2" component="div">
+                            <ul>
+                                {recipeResult.ingredients.map(ingredient => {
+                                    return <li key={ingredient.name}>{ingredient.name} - {ingredient.measure}</li>
+                                })}
+                            </ul>
+                        </Typography>
+                        <Typography variant="body1" component="div">
+                            <div className={styles.RecipeCardInstructions}
+                                 dangerouslySetInnerHTML={{__html: recipeResult.recipe}}/>
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <FacebookShareButton url={window.location.href}>
-                        <FacebookIcon size={32} />
+                        <FacebookIcon size={32}/>
                     </FacebookShareButton>
                     <TwitterShareButton url={window.location.href}>
-                        <TwitterIcon size={32} />
+                        <TwitterIcon size={32}/>
                     </TwitterShareButton>
                     <WhatsappShareButton url={window.location.href}>
-                        <WhatsappIcon size={32} />
+                        <WhatsappIcon size={32}/>
                     </WhatsappShareButton>
                 </CardActions>
             </Card>
@@ -100,7 +108,7 @@ const Recipe = (props) => {
     }
 
     return (
-        <div className={styles.recipe}>
+        <div className={styles.Recipe}>
             {props.location.search === '' ? <Redirect to="/"/> : null}
 
             <Container maxWidth="md">
